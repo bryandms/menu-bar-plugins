@@ -7,6 +7,17 @@
     "lint": "eslint '**/*.js'",
     "lint:fix": "prettier-eslint '**/*.js' --write"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bryandms/menu-bar-plugins.git"
@@ -29,6 +40,8 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^12.1.2",
     "prettier-eslint": "^13.0.0",
     "prettier-eslint-cli": "^5.0.1"
   }
