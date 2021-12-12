@@ -8,28 +8,36 @@ const { AIRTABLE_BASE_URL } = require('../config')
 /* ––
  * –––– Public API
  * –––––––––––––––––––––––––––––––––– */
-const openIssues = () =>
-  getRecords('Issues', 'Pendiente | Desarrollo', (records) => {
-    console.log(`Open Issues | color=${primaryColor} size=18`)
-    console.log('---')
+const showOpenIssues = () =>
+  getRecords('Issues', 'Pendiente | Desarrollo', (issues) =>
+    showOpenIssuesSection(issues)
+  )
 
-    records.forEach((record) => {
-      const id = record.get('ID')
-      const name = `📋 ${record.get('Nombre')}`
-      const user = `👤 ${record.get('Responsable')}`
-      const status = `📈 ${record.get('Status')}`
+/* ––
+ * –––– Helper methods
+ * –––––––––––––––––––––––––––––––––– */
+const showOpenIssuesSection = (issues) => {
+  console.log(`Open Issues | color=${primaryColor} size=18`)
+  console.log('---')
+  issues.forEach((issue) => showOpenIssue(issue))
+}
 
-      console.log(`Issue ${id} | href=${AIRTABLE_BASE_URL} size=16`)
-      console.log(name)
-      console.log(user)
-      console.log(status)
-      console.log('---')
-    })
-  })
+const showOpenIssue = (issue) => {
+  const id = issue.get('ID')
+  const name = `📋 ${issue.get('Nombre')}`
+  const user = `👤 ${issue.get('Responsable')}`
+  const status = `📈 ${issue.get('Status')}`
+
+  console.log(`Issue ${id} | href=${AIRTABLE_BASE_URL} size=16`)
+  console.log(name)
+  console.log(user)
+  console.log(status)
+  console.log('---')
+}
 
 /* ––
  * –––– Exports
  * –––––––––––––––––––––––––––––––––– */
 module.exports = {
-  openIssues
+  showOpenIssues
 }
