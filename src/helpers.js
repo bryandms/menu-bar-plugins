@@ -3,7 +3,7 @@
  * –––– Imports
  * –––––––––––––––––––––––––––––––––– */
 const { exec } = require('child_process')
-const { ICON, PLUGIN_NAME } = require('./config')
+const { PLUGIN_ICON, PLUGIN_NAME } = require('./config')
 
 /* ––
  * –––– Variables declaration
@@ -25,7 +25,7 @@ const loadOSTheme = new Promise((resolve) => {
 })
 
 const showPluginName = () => {
-  console.log(`${PLUGIN_NAME} | templateImage=${ICON}`)
+  console.log(`${PLUGIN_NAME} | templateImage=${PLUGIN_ICON}`)
   console.log('---')
 }
 

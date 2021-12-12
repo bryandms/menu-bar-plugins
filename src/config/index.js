@@ -2,7 +2,7 @@
  * –––– Imports
  * –––––––––––––––––––––––––––––––––– */
 const airtableConfig = require('./airtable')
-const appConfig = require('./app')
+const pluginConfig = require('./plugin')
 const bitbucketConfig = require('./bitbucket')
 
 /* ––
@@ -10,6 +10,6 @@ const bitbucketConfig = require('./bitbucket')
  * –––––––––––––––––––––––––––––––––– */
 module.exports = {
   ...airtableConfig,
-  ...appConfig,
+  ...pluginConfig,
   ...bitbucketConfig
 }
