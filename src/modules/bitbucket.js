@@ -10,16 +10,12 @@ const { showErrorMessage } = require('../helpers')
 /* ––
  * –––– Public API
  * –––––––––––––––––––––––––––––––––– */
-const userPullRequest = () =>
+const showUserPullRequests = () =>
   get(`${BITBUCKET_API_URL}/user`, BITBUCKET_REQUEST_OPTIONS, (user) => {
     const { type, username } = user
 
     if (type !== 'error') {
-      get(
-        `${BITBUCKET_API_URL}/pullrequests/${username}?state=OPEN`,
-        BITBUCKET_REQUEST_OPTIONS,
-        showUserPullRequests
-      )
+      requestUserPullRequests(username)
     } else {
       showErrorMessage()
     }
@@ -28,10 +24,18 @@ const userPullRequest = () =>
 /* ––
  * –––– Helper methods
  * –––––––––––––––––––––––––––––––––– */
-const showUserPullRequests = (pullRequests) => {
+const requestUserPullRequests = (username) => {
+  get(
+    `${BITBUCKET_API_URL}/pullrequests/${username}?state=OPEN`,
+    BITBUCKET_REQUEST_OPTIONS,
+    showUserPullRequestsSection
+  )
+}
+
+const showUserPullRequestsSection = (pullRequests) => {
   console.log(`Open Pull Requests | color=${primaryColor} size=18`)
   console.log('---')
-  pullRequests.values.forEach((value) => showPullRequest(value))
+  pullRequests.values.forEach((pullRequest) => showPullRequest(pullRequest))
 }
 
 const showPullRequest = (pullRequest) => {
@@ -49,5 +53,5 @@ const showPullRequest = (pullRequest) => {
  * –––– Exports
  * –––––––––––––––––––––––––––––––––– */
 module.exports = {
-  userPullRequest
+  showUserPullRequests
 }
