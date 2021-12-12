@@ -46,6 +46,7 @@
     "prettier-eslint-cli": "^5.0.1"
   },
   "dependencies": {
+    "airtable": "^0.11.1",
     "dotenv": "^10.0.0"
   }
 }
